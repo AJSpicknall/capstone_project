@@ -1,9 +1,10 @@
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render
 
 
 def landing_page_view(request: HttpRequest) -> HttpResponse:
-    html_content = """
-    <h1>The Ol' Game Site</h1>
-    <p>Welcome to the Ol' Game Site!</p>
-    """
-    return HttpResponse(html_content)
+    return render(request, "main/home.html")
+
+
+def about_view(request: HttpRequest) -> HttpResponse:
+    return render(request, "main/about.html")
