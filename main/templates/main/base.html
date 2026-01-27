@@ -14,16 +14,11 @@
         <a href="{% url 'about' %}">About</a>
       </nav>
 
-      <hr />
     </header>
 
     <main>
       {% block content %}{% endblock %}
     </main>
 
-    <hr />
-    <footer>
-      <p>&copy; {% now "Y" %} AJ Spicknall</p>
-    </footer>
   </body>
 </html>
