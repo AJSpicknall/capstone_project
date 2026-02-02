@@ -1,8 +1,18 @@
 {% extends "main/base.html" %}
+{% load static %}
+
+  <!--
+  # Code adapted with assistance from ChatGPT (February 2026).
+
+  # Prompt: "What do I need to do to make the img work?"
+
+  # Student review: I guess adding the load static line even though I extended it was necessary for the image to show up.
+  --> 
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
   <h1>Welcome</h1>
   <p>This is my home page for my capstone project.</p>
+  <img src="{% static 'main/images/aj-image.jpeg' %}" alt="This is Me">
 {% endblock %}
