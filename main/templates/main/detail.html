@@ -1,0 +1,11 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ name_of_game }}{% endblock %}
+
+{% block content %}
+  <h1>{{ name_of_game }}</h1>
+  <p><strong>This game was uploaded by:</strong> {{ name }}</p>
+  <p><strong>The User's Level of Difficulty Rating:</strong> {{ difficulty }}/10</p>
+  <p><strong>Is Fighting a Feature:</strong> {{ fight }}</p>
+  <p><a href="{% url 'home' %}">Back to all games</a></p>
+{% endblock %}
