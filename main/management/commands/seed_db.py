@@ -2,6 +2,12 @@ import csv
 from django.core.management.base import BaseCommand
 from main.models import Videogames
 
+    # Code adapted with assistance from ChatGPT (February 2026).
+
+    # Prompt: "Given this lab example, what are the things I need to adjust to make this work for my code?"
+
+    # Student review: I used the lab example as a basis to create this file, then with some aid from AI, I was able to successfully build the file.
+
 class Command(BaseCommand):
     help = "Imports videogame data from a CSV file"
 
