@@ -45,6 +45,7 @@ class Videogames(models.Model):
     def __str__(self):
         return f"{self.uploaded_by}, their favorite video game is {self.favorite_video_game} the Difficulty level out of 10 is: {self.level_of_difficulty}, and is Fighting a feature? {self.fighting_a_feature}"
 
+
 class VideogameProfile(models.Model):
     videogame = models.OneToOneField(Videogames, on_delete=models.CASCADE, related_name="profile")
     release_year = models.PositiveIntegerField(null=True, blank=True)
@@ -52,3 +53,13 @@ class VideogameProfile(models.Model):
 
     def __str__(self):
         return f"Profile for {self.videogame.favorite_video_game}"
+
+
+class Feedback(models.Model):
+    user_name = models.CharField(max_length=20)
+    email = models.EmailField()
+    subject = models.CharField(max_length=50)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.user_name}: {self.subject}"

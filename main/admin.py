@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Genre, Publisher, VideogameProfile, Videogames
+from .models import Feedback, Genre, Publisher, VideogameProfile, Videogames
 
 
 class VideogamesAdmin(admin.ModelAdmin):
@@ -31,7 +31,13 @@ class VideogameProfileAdmin(admin.ModelAdmin):
     search_fields = ("videogame__favorite_video_game", "videogame__uploaded_by")
 
 
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ("user_name", "email", "subject")
+    search_fields = ("user_name", "email", "subject", "message")
+
+
 admin.site.register(Videogames, VideogamesAdmin)
 admin.site.register(Publisher, PublisherAdmin)
 admin.site.register(Genre, GenreAdmin)
 admin.site.register(VideogameProfile, VideogameProfileAdmin)
+admin.site.register(Feedback, FeedbackAdmin)

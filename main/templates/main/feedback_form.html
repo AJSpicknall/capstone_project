@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block content %}
+  <h1>Send Feedback</h1>
+  <p>Have a suggestion or comment? Fill out the form and send it below!</p>
+
+  <form method="POST" class="feedback-form">
+    {% csrf_token %}
+
+    {% for field in form %}
+      <div class="form-control {% if field.errors %} errors {% endif %}">
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
+      </div>
+    {% endfor %}
+
+    <button type="submit">Send</button>
+  </form>
+{% endblock %}
