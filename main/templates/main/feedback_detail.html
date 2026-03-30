@@ -6,7 +6,7 @@
   <article class="feedback-detail">
     <h1>
       {{ feedback.subject }}
-      {% if is_favorite %}[Favorite]{% endif %}
+      {% if is_favorite %}⭐{% endif %}
     </h1>
     <p><strong>From:</strong> {{ feedback.user_name }} ({{ feedback.email }})</p>
     <p>{{ feedback.message }}</p>

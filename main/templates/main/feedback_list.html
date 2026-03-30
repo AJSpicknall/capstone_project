@@ -20,7 +20,7 @@
         <article class="feedback-card">
           <h2>
             <a href="{{ post.get_absolute_url }}">{{ post.subject }}</a>
-            {% if post.id in favorites %}[Favorite]{% endif %}
+            {% if post.id in favorites %}⭐{% endif %}
           </h2>
           <p><strong>By:</strong> {{ post.user_name }}</p>
           <p>{{ post.message|truncatechars:100 }}</p>
