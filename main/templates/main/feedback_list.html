@@ -1,0 +1,43 @@
+{% extends "main/base.html" %}
+
+{% block title %}Feedback Gallery{% endblock %}
+
+{% block content %}
+  <h1>Feedback Gallery</h1>
+  <p><a href="{% url 'feedback' %}">Submit New Feedback</a></p>
+
+  <!--
+  # Code adapted with assistance from ChatGPT (March 2026).
+
+  # Prompt: "Can you help me and give me an idea on what a feedback list type page would look like?"
+
+  # Student Review: I really liked what I was shown because it made my page more aligned and look better, plus it showed me how to make things applicable to be favorited in html.
+  -->
+
+  {% if feedback_list %}
+    <div class="feedback-gallery">
+      {% for post in feedback_list %}
+        <article class="feedback-card">
+          <h2>
+            <a href="{{ post.get_absolute_url }}">{{ post.subject }}</a>
+            {% if post.id in favorites %}[Favorite]{% endif %}
+          </h2>
+          <p><strong>By:</strong> {{ post.user_name }}</p>
+          <p>{{ post.message|truncatechars:100 }}</p>
+          {% if post.image %}
+            <a href="{{ post.get_absolute_url }}">
+              <img src="{{ post.image.url }}" alt="Uploaded file for {{ post.subject }}">
+            </a>
+          {% endif %}
+          <p>
+            <a href="{{ post.get_favorite_toggle_url }}?next={% url 'feedback_list' %}">
+              {% if post.id in favorites %}Remove Favorite{% else %}Add Favorite{% endif %}
+            </a>
+          </p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No feedback submissions yet.</p>
+  {% endif %}
+{% endblock %}

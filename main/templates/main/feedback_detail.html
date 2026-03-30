@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ feedback.subject }}{% endblock %}
+
+{% block content %}
+  <article class="feedback-detail">
+    <h1>
+      {{ feedback.subject }}
+      {% if is_favorite %}[Favorite]{% endif %}
+    </h1>
+    <p><strong>From:</strong> {{ feedback.user_name }} ({{ feedback.email }})</p>
+    <p>{{ feedback.message }}</p>
+    {% if feedback.image %}
+      <img src="{{ feedback.image.url }}" alt="Uploaded file for {{ feedback.subject }}">
+    {% endif %}
+    <p>
+      <a href="{{ feedback.get_favorite_toggle_url }}?next={{ feedback.get_absolute_url }}">
+        {% if is_favorite %}Remove Favorite{% else %}Add Favorite{% endif %}
+      </a>
+    </p>
+    <p><a href="{% url 'feedback_list' %}">Back to Gallery</a></p>
+  </article>
+{% endblock %}

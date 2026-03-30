@@ -98,3 +98,39 @@ img {
 .feedback-form button:hover {
   background-color: #2e3a4b;
 }
+
+.feedback-gallery {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.feedback-card {
+  border: 1px solid #d8d3cc;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #fff;
+  text-align: left;
+}
+
+.feedback-card h2 {
+  margin-top: 0;
+}
+
+.feedback-card img {
+  margin-top: 8px;
+  max-width: 100%;
+}
+
+.feedback-detail {
+  max-width: 720px;
+  width: 100%;
+  text-align: left;
+}
+
+.feedback-detail img {
+  margin-top: 12px;
+  max-width: 600px;
+  width: 100%;
+}

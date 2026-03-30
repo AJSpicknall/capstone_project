@@ -60,6 +60,13 @@ class Feedback(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=50)
     message = models.TextField()
+    image = models.ImageField(upload_to="feedback_uploads/", blank=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse("feedback_detail", args=[self.id])
+
+    def get_favorite_toggle_url(self):
+        return reverse("toggle_favorite", args=[self.id])
 
     def __str__(self):
         return f"{self.user_name}: {self.subject}"

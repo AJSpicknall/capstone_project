@@ -5,5 +5,6 @@
 {% block content %}
   <h1>Thank You</h1>
   <p>Your feedback was submitted successfully.</p>
+  <p><a href="{% url 'feedback_list' %}">View Feedback Gallery</a></p>
   <p><a href="{% url 'home' %}">Return to Home</a></p>
 {% endblock %}
