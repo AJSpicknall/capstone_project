@@ -119,3 +119,7 @@ STATIC_URL = 'static/'
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Keep any favorites that were made available after the browser restarts.
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1209600
+

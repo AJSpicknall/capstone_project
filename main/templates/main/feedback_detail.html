@@ -12,6 +12,8 @@
     <p>{{ feedback.message }}</p>
     {% if feedback.image %}
       <img src="{{ feedback.image.url }}" alt="Uploaded file for {{ feedback.subject }}">
+    {% else %}
+      <p class="media-note">No image was uploaded with this feedback.</p>
     {% endif %}
     <p>
       <a href="{{ feedback.get_favorite_toggle_url }}?next={{ feedback.get_absolute_url }}">

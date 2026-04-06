@@ -28,6 +28,8 @@
             <a href="{{ post.get_absolute_url }}">
               <img src="{{ post.image.url }}" alt="Uploaded file for {{ post.subject }}">
             </a>
+          {% else %}
+            <p class="media-note">No image uploaded for this submission.</p>
           {% endif %}
           <p>
             <a href="{{ post.get_favorite_toggle_url }}?next={% url 'feedback_list' %}">
@@ -38,6 +40,6 @@
       {% endfor %}
     </div>
   {% else %}
-    <p>No feedback submissions yet.</p>
+    <p>No submissions yet. Be the first!</p>
   {% endif %}
 {% endblock %}

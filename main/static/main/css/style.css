@@ -121,6 +121,10 @@ img {
 .feedback-card img {
   margin-top: 8px;
   max-width: 100%;
+  max-height: 220px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
 .feedback-detail {
@@ -131,6 +135,36 @@ img {
 
 .feedback-detail img {
   margin-top: 12px;
-  max-width: 600px;
+  max-width: 100%;
   width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border: 1px solid #d8d3cc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.media-note {
+  color: #5d5a56;
+  font-size: 0.94rem;
+  font-style: italic;
+}
+
+.empty-state {
+  width: 100%;
+  border: 1px dashed #b8b2ab;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.field-help {
+  color: #5d5a56;
+  font-size: 0.9rem;
+  margin: 6px 0 0;
+}
+
+.form-error-summary ul {
+  color: #9a1d1d;
+  margin-top: 0;
 }
