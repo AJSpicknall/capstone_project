@@ -1,45 +1,47 @@
 {% extends "main/base.html" %}
+{% load static %}
 
-{% block title %}Feedback Gallery{% endblock %}
+{% block title %}Community Gallery of AJ's Games{% endblock %}
 
 {% block content %}
-  <h1>Feedback Gallery</h1>
-  <p><a href="{% url 'feedback' %}">Submit New Feedback</a></p>
+<section class="panel prose">
+  <h1>Community Feedback Gallery</h1>
+  <p>Browse all submissions and then mark useful posts as favorites for your browser session.</p>
+  <p><a href="{% url 'feedback' %}">Create a new submission</a></p>
+</section>
 
-  <!--
-  # Code adapted with assistance from ChatGPT (March 2026).
+{% if feedback_list %}
+  <div class="feedback-gallery">
+    {% for post in feedback_list %}
+      <article class="feedback-card">
+        <h2><a href="{{ post.get_absolute_url }}">{{ post.subject }}</a></h2>
 
-  # Prompt: "Can you help me and give me an idea on what a feedback list type page would look like?"
-
-  # Student Review: I really liked what I was shown because it made my page more aligned and look better, plus it showed me how to make things applicable to be favorited in html.
-  -->
-
-  {% if feedback_list %}
-    <div class="feedback-gallery">
-      {% for post in feedback_list %}
-        <article class="feedback-card">
-          <h2>
-            <a href="{{ post.get_absolute_url }}">{{ post.subject }}</a>
-            {% if post.id in favorites %}⭐{% endif %}
-          </h2>
-          <p><strong>By:</strong> {{ post.user_name }}</p>
-          <p>{{ post.message|truncatechars:100 }}</p>
+        <a href="{{ post.get_absolute_url }}" class="feedback-image-wrap">
           {% if post.image %}
-            <a href="{{ post.get_absolute_url }}">
-              <img src="{{ post.image.url }}" alt="Uploaded file for {{ post.subject }}">
-            </a>
+            <img class="feedback-preview-image" src="{{ post.image.url }}" alt="Uploaded file for {{ post.subject }}" />
+          {% elif post.headshot_url %}
+            <img class="feedback-preview-image" src="{{ post.headshot_url }}" alt="{{ post.user_name }} headshot" />
           {% else %}
-            <p class="media-note">No image uploaded for this submission.</p>
+            <img class="feedback-preview-image" src="{% static 'main/images/aj-image.jpeg' %}" alt="Default reviewer avatar" />
           {% endif %}
-          <p>
-            <a href="{{ post.get_favorite_toggle_url }}?next={% url 'feedback_list' %}">
-              {% if post.id in favorites %}Remove Favorite{% else %}Add Favorite{% endif %}
-            </a>
-          </p>
-        </article>
-      {% endfor %}
-    </div>
-  {% else %}
-    <p>No submissions yet. Be the first!</p>
-  {% endif %}
+        </a>
+
+        {% if post.id in favorites %}
+          <p class="badge">Favorited</p>
+        {% endif %}
+        <p><strong>By:</strong> {{ post.user_name }}</p>
+        <p>{{ post.message|truncatechars:120 }}</p>
+        <form method="post" action="{{ post.get_favorite_toggle_url }}" class="inline-form">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'feedback_list' %}" />
+          <button type="submit" class="link-button">
+            {% if post.id in favorites %}Remove Favorite{% else %}Add Favorite{% endif %}
+          </button>
+        </form>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty-state">No submissions yet. Add the first feedback post.</p>
+{% endif %}
 {% endblock %}

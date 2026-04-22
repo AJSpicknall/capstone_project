@@ -1,32 +1,33 @@
 {% extends "main/base.html" %}
 
-{% block title %}Feedback{% endblock %}
+{% block title %}Submit Feedback to AJ's Games{% endblock %}
 
 {% block content %}
-  <h1>Send Feedback</h1>
-  <p>Have a suggestion or comment? Fill out the form and send it below!</p>
+<section class="panel prose">
+  <h1>Submit Feedback</h1>
+  <p>Share suggestions, corrections, or feature requests for this portfolio project.</p>
+</section>
 
-  <form method="POST" enctype="multipart/form-data" class="feedback-form">
-    {% csrf_token %}
+<form method="post" enctype="multipart/form-data" class="feedback-form panel">
+  {% csrf_token %}
 
-    {% if form.non_field_errors %}
-      <div class="form-error-summary">
-        {{ form.non_field_errors }}
-      </div>
-    {% endif %}
+  {% if form.non_field_errors %}
+    <div class="form-error-summary">{{ form.non_field_errors }}</div>
+  {% endif %}
 
-    {% for field in form %}
-      <div class="form-control {% if field.errors %} errors {% endif %}">
-        {{ field.label_tag }}
-        {{ field }}
-        {% if field.name == "image" %}
-          <p class="field-help">Accepted file types: JPG, PNG, GIF, WEBP.</p>
-        {% endif %}
-        {{ field.errors }}
-      </div>
-    {% endfor %}
+  {% for field in form %}
+    <div class="form-control {% if field.errors %}errors{% endif %}">
+      {{ field.label_tag }}
+      {{ field }}
+      {% if field.name == "image" %}
+        <p class="field-help">Accepted file types: JPG, PNG, or WEBP.</p>
+      {% endif %}
+      {{ field.errors }}
+    </div>
+  {% endfor %}
 
-    <button type="submit">Send</button>
-  </form>
-  <p><a href="{% url 'feedback_list' %}">View Submitted Feedback</a></p>
+  <button type="submit">Submit Feedback</button>
+</form>
+
+<p><a href="{% url 'feedback_list' %}">View community submissions</a></p>
 {% endblock %}

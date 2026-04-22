@@ -1,18 +1,43 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-  <!--
-  # Code adapted with assistance from ChatGPT (February 2026).
-
-  # Prompt: "What do I need to do to make the img work?"
-
-  # Student review: I guess adding the load static line even though I extended it was necessary for the image to show up.
-  --> 
-
-{% block title %}Home{% endblock %}
+{% block title %}Home of AJ's Games{% endblock %}
 
 {% block content %}
-  <h1>Welcome</h1>
-  <p>This is my home page for my capstone project.</p>
-  <img src="{% static 'main/images/aj-image.jpeg' %}" alt="This is Me">
+<section class="hero">
+  <div>
+    <p class="eyebrow">AJ's Games</p>
+    <h1>My friends and I favorite games.</h1>
+    <p>
+      Explore submissions from me and my friends, compare the difficulty ratings we give each game, and then review the games details like its genre and publisher!
+    </p>
+  </div>
+  <img src="{% static 'main/images/aj-image.jpeg' %}" alt="Project creator portrait" />
+</section>
+
+<section class="panel">
+  <h2>Current Game Library</h2>
+  {% if videogames %}
+    <div class="card-grid">
+      {% for game in videogames %}
+        <article class="card">
+          <a class="game-card-image-wrap" href="{{ game.get_absolute_url }}">
+            <img
+              class="game-card-image"
+              src="{% static game.image_static_path %}"
+              alt="{{ game.favorite_video_game }} cover art"
+              loading="lazy"
+            />
+          </a>
+          <h3><a href="{{ game.get_absolute_url }}">{{ game.favorite_video_game }}</a></h3>
+          <p><strong>Submitted by:</strong> {{ game.uploaded_by }}</p>
+          <p><strong>Difficulty:</strong> {{ game.level_of_difficulty }}/10</p>
+          <p><strong>Fighting Feature:</strong> {% if game.fighting_a_feature %}Yes{% else %}No{% endif %}</p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty-state">No games are available yet. Run the seeding command to load the catalog.</p>
+  {% endif %}
+</section>
 {% endblock %}

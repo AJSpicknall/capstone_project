@@ -1,11 +1,32 @@
 {% extends "main/base.html" %}
+{% load static %}
 
-{% block title %}{{ name_of_game }}{% endblock %}
+{% block title %}{{ videogame.favorite_video_game }} in AJ's Game{% endblock %}
 
 {% block content %}
-  <h1>{{ name_of_game }}</h1>
-  <p><strong>This game was uploaded by:</strong> {{ name }}</p>
-  <p><strong>The User's Level of Difficulty Rating:</strong> {{ difficulty }}/10</p>
-  <p><strong>Is Fighting a Feature:</strong> {{ fight }}</p>
-  <p><a href="{% url 'home' %}">Back to all games</a></p>
+<article class="panel prose">
+  <div class="game-detail-media">
+    <img
+      src="{% static videogame.image_static_path %}"
+      alt="{{ videogame.favorite_video_game }} cover art"
+    />
+  </div>
+  <h1>{{ videogame.favorite_video_game }}</h1>
+  <p><strong>Submitted by:</strong> {{ videogame.uploaded_by }}</p>
+  <p><strong>Difficulty rating:</strong> {{ videogame.level_of_difficulty }}/10</p>
+  <p><strong>Fighting mechanics included:</strong> {% if videogame.fighting_a_feature %}Yes{% else %}No{% endif %}</p>
+  {% if videogame.publisher %}
+    <p><strong>Publisher:</strong> {{ videogame.publisher.name }}</p>
+  {% endif %}
+  {% with game_genres=videogame.genres.all %}
+    {% if game_genres %}
+      <p><strong>Genres:</strong>
+        {% for genre in game_genres %}
+          {{ genre.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    {% endif %}
+  {% endwith %}
+  <p><a href="{% url 'home' %}">Back to library</a></p>
+</article>
 {% endblock %}

@@ -1,10 +1,12 @@
 {% extends "main/base.html" %}
 
-{% block title %}Thank You{% endblock %}
+{% block title %}Feedback Received on AJ's Games {% endblock %}
 
 {% block content %}
+<section class="panel prose">
   <h1>Thank You</h1>
-  <p>Your feedback was submitted successfully.</p>
-  <p><a href="{% url 'feedback_list' %}">View Feedback Gallery</a></p>
-  <p><a href="{% url 'home' %}">Return to Home</a></p>
+  <p>Your feedback has been recorded and added to the community gallery!</p>
+  <p><a href="{% url 'feedback_list' %}">View all feedback</a></p>
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+</section>
 {% endblock %}

@@ -3,12 +3,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 from django.utils.text import slugify
 
-    # Code adapted with assistance from ChatGPT (February 2026).
-
-    # Prompt: "I am trying to modify and get to work some data models, can I get some assistance with understanding what is going wrong with my current models?"
-
-    # Student review: I asked AI to help me better understand how these types of models work, then with my data and our in class lab, I was able to came to a better understanding on how to create the necessary relationships and make them function.
-
 class Publisher(models.Model):
     name = models.CharField(max_length=150)
     headquarters = models.CharField(max_length=150)
@@ -33,10 +27,20 @@ class Videogames(models.Model):
     fighting_a_feature = models.BooleanField(default=False)
     publisher = models.ForeignKey(Publisher, on_delete=models.SET_NULL, null=True, blank=True)
     genres = models.ManyToManyField(Genre, blank=True, related_name="videogames")
-    slug = models.SlugField(default='', null=False, db_index=True)
+    slug = models.SlugField(default="", null=False, db_index=True, unique=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.favorite_video_game)
+        base_slug = slugify(self.favorite_video_game) or "videogame"
+        slug = base_slug
+        suffix = 1
+        while (
+            Videogames.objects.filter(slug=slug)
+            .exclude(pk=self.pk)
+            .exists()
+        ):
+            slug = f"{base_slug}-{suffix}"
+            suffix += 1
+        self.slug = slug
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

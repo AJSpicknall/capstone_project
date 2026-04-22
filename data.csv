@@ -1,11 +1,29 @@
-uploaded_by,favorite_video_game,level_of_difficulty,fighting_a_feature
-Alex,Minecraft,3,True
-Bri,Terraria,4,True
-Casey,GoldenEye 007,3,True
-Devin,Cooking Mama,5,False
-Erin,Metroid,2,True
-Frankie,The Legend of Zelda: A Link to the Past,2,True
-Gray,Final Fantasy VII,4,True
-Harper,Stardew Valley,1,True
-Jamie,Super Mario 64,1,True
-Kai,Animal Crossing,1,False
+uploaded_by,favorite_video_game,level_of_difficulty,fighting_a_feature,publisher,headquarters,genres,release_year,platform_notes
+Alex,Minecraft,3,True,Mojang Studios,Stockholm Sweden,Sandbox|Survival,2011,Great for creative and multiplayer sessions.
+Bri,Terraria,4,True,Re-Logic,Indiana United States,Sandbox|Action,2011,Best played with progression-focused world goals.
+Casey,GoldenEye 007,3,True,Rare,Twycross United Kingdom,FPS|Action,1997,Historic split-screen benchmark title.
+Devin,Cooking Mama,5,False,Office Create,Tokyo Japan,Simulation|Family,2006,Accessible controls and short mini game loops.
+Erin,Metroid Prime,6,True,Nintendo,Kyoto Japan,Action|Adventure,2002,Atmospheric exploration with environmental puzzles.
+Frankie,The Legend of Zelda: A Link to the Past,2,True,Nintendo,Kyoto Japan,Adventure|Puzzle,1991,Strong dungeon pacing and progression.
+Gray,Final Fantasy VII,4,True,Square,Tokyo Japan,RPG|Adventure,1997,Long-form RPG with broad cast and major story arcs.
+Harper,Stardew Valley,1,True,ConcernedApe,Seattle United States,Simulation|RPG,2016,Relaxed farming and social progression systems.
+Jamie,Super Mario 64,1,True,Nintendo,Kyoto Japan,Platformer|Adventure,1996,Foundational 3D movement design.
+Kai,Animal Crossing: New Horizons,1,False,Nintendo,Kyoto Japan,Simulation|Social,2020,Daily-play loop with customization and events.
+Lena,Elden Ring,8,True,FromSoftware,Tokyo Japan,Action RPG|Open World,2022,Demanding combat and large world discovery.
+Nora,Portal 2,3,False,Valve,Bellevue United States,Puzzle|Adventure,2011,High quality puzzle escalation and writing.
+Owen,Hollow Knight,6,True,Team Cherry,Adelaide Australia,Metroidvania|Action,2017,Deep exploration with precise platform combat.
+Priya,Celeste,7,False,Extremely OK Games,Vancouver Canada,Platformer|Indie,2018,Precision platforming with assist options.
+Quinn,Monster Hunter: World,7,True,Capcom,Osaka Japan,Action|RPG,2018,Co-op hunt loops and gear progression.
+Riley,Mass Effect 2,5,True,BioWare,Edmonton Canada,RPG|Sci-Fi,2010,Strong companion arcs and mission variety.
+Sage,The Witcher 3: Wild Hunt,6,True,CD Projekt Red,Warsaw Poland,RPG|Open World,2015,Quest writing and world detail remain excellent.
+Theo,Overwatch 2,4,True,Blizzard Entertainment,Irvine United States,FPS|Team Shooter,2022,Hero-based roles with objective modes.
+Uma,Street Fighter 6,5,True,Capcom,Osaka Japan,Fighting|Competitive,2023,Modern control options and training tools.
+Victor,Baldur's Gate 3,6,True,Larian Studios,Ghent Belgium,RPG|Strategy,2023,Turn-based party systems with reactive storytelling.
+Will,Forza Horizon 5,3,False,Playground Games,Leamington Spa United Kingdom,Racing|Open World,2021,Large map with accessible arcade racing.
+Xena,Tetris Effect: Connected,2,False,Enhance,Tokyo Japan,Puzzle|Arcade,2020,Audio-reactive visuals and focused puzzle flow.
+Yara,Apex Legends,5,True,Respawn Entertainment,Los Angeles United States,Battle Royale|FPS,2019,Squad combat with mobility-focused heroes.
+Zane,God of War Ragnarok,6,True,Santa Monica Studio,Los Angeles United States,Action|Adventure,2022,Cinematic storytelling with skill progression.
+Blake,Resident Evil 4,6,True,Capcom,Osaka Japan,Survival Horror|Action,2005,Resource tension and strong encounter design.
+Cora,Persona 5 Royal,5,False,Atlus,Tokyo Japan,RPG|Social Sim,2020,Calendar systems and turn-based battles.
+Drew,Red Dead Redemption 2,7,True,Rockstar Games,New York United States,Action|Open World,2018,Detailed simulation and narrative depth.
+Eli,Diablo IV,5,True,Blizzard Entertainment,Irvine United States,Action RPG|Dungeon Crawler,2023,Seasonal loops and loot-centric progression.
