@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% load static %}
 
 {% block title %}{{ feedback.subject }} about AJ's Games{% endblock %}
 
@@ -12,9 +13,11 @@
   <p>{{ feedback.message }}</p>
 
   {% if feedback.image %}
-    <img src="{{ feedback.image.url }}" alt="Uploaded file for {{ feedback.subject }}" />
+    <img class="feedback-detail-image" src="{{ feedback.image.url }}" alt="Uploaded file for {{ feedback.subject }}" />
+  {% elif headshot_url %}
+    <img class="feedback-detail-image" src="{{ headshot_url }}" alt="{{ feedback.user_name }} headshot" />
   {% else %}
-    <p class="media-note">No image was uploaded with this feedback.</p>
+    <img class="feedback-detail-image" src="{% static 'main/images/aj-image.jpeg' %}" alt="Default reviewer avatar" />
   {% endif %}
 
   <form method="post" action="{{ feedback.get_favorite_toggle_url }}" class="inline-form">

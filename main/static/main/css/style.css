@@ -246,12 +246,12 @@ a:hover {
 
 .feedback-image-wrap {
   display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
+  width: min(100%, 170px);
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid var(--border);
-  margin-bottom: var(--space-2);
+  margin: 0 auto var(--space-2);
 }
 
 .feedback-preview-image {
@@ -260,9 +260,12 @@ a:hover {
   object-fit: cover;
 }
 
-.feedback-detail img {
-  width: 100%;
-  height: auto;
+.feedback-detail-image {
+  width: min(100%, 230px);
+  height: 230px;
+  display: block;
+  margin: var(--space-3) auto;
+  object-fit: cover;
   border-radius: 8px;
   border: 1px solid var(--border);
 }

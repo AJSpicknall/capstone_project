@@ -13,6 +13,16 @@ from .forms import FeedbackForm
 from .models import Feedback, Videogames
 
 
+def resolve_feedback_headshot_url(user_name):
+    base_name = slugify(user_name)
+    for extension in ("png", "jpg", "jpeg", "webp"):
+        relative_path = Path("feedback_headshots") / f"{base_name}.{extension}"
+        absolute_path = Path(settings.MEDIA_ROOT) / relative_path
+        if absolute_path.exists():
+            return f"{settings.MEDIA_URL.rstrip('/')}/{relative_path.as_posix()}"
+    return None
+
+
 class GameImageMixin:
     """Resolve a static image path for each game based on title/slug."""
 
@@ -133,19 +143,10 @@ class FeedbackListView(FavoritesSessionMixin, ListView):
     context_object_name = "feedback_list"
     ordering = ("-id",)
 
-    def _resolve_headshot_url(self, user_name):
-        base_name = slugify(user_name)
-        for extension in ("png", "jpg", "jpeg", "webp"):
-            relative_path = Path("feedback_headshots") / f"{base_name}.{extension}"
-            absolute_path = Path(settings.MEDIA_ROOT) / relative_path
-            if absolute_path.exists():
-                return f"{settings.MEDIA_URL.rstrip('/')}/{relative_path.as_posix()}"
-        return None
-
     def get_queryset(self):
         queryset = list(super().get_queryset())
         for feedback in queryset:
-            feedback.headshot_url = self._resolve_headshot_url(feedback.user_name)
+            feedback.headshot_url = resolve_feedback_headshot_url(feedback.user_name)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -165,6 +166,7 @@ class FeedbackDetailView(FavoritesSessionMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["is_favorite"] = self.object.id in self.get_favorites()
+        context["headshot_url"] = resolve_feedback_headshot_url(self.object.user_name)
         return context
 
 
