@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,9 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-74l6p76kg0gah6w=5^toc(0r#lrs+817d_ip4d9vi+2(w+ho%r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+default_hosts = [".onrender.com", "localhost", "127.0.0.1"]
+env_hosts = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "").split(",") if h.strip()]
+ALLOWED_HOSTS = default_hosts + env_hosts
+
+default_csrf = ["https://*.onrender.com"]
+env_csrf = [u.strip() for u in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if u.strip()]
+CSRF_TRUSTED_ORIGINS = default_csrf + env_csrf
 
 
 # Application definition
