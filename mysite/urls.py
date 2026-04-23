@@ -24,5 +24,6 @@ urlpatterns = [
     path("", include("main.urls")),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve uploaded media files in both local and Render runtime.
+# For larger production apps, a dedicated object store/CDN should be used.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
