@@ -4,8 +4,6 @@ __pycache__/
 
 db.sqlite3
 venv/
-.env
-staticfiles/
 
 .vscode/
 .DS_Store
