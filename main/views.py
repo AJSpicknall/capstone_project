@@ -3,6 +3,7 @@ from pathlib import Path
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.templatetags.static import static
 from django.urls import reverse, reverse_lazy
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.text import slugify
@@ -16,10 +17,10 @@ from .models import Feedback, Videogames
 def resolve_feedback_headshot_url(user_name):
     base_name = slugify(user_name)
     for extension in ("png", "jpg", "jpeg", "webp"):
-        relative_path = Path("feedback_headshots") / f"{base_name}.{extension}"
-        absolute_path = Path(settings.MEDIA_ROOT) / relative_path
+        relative_path = Path("main") / "images" / "feedback_headshots" / f"{base_name}.{extension}"
+        absolute_path = Path(settings.BASE_DIR) / "main" / "static" / relative_path
         if absolute_path.exists():
-            return f"{settings.MEDIA_URL.rstrip('/')}/{relative_path.as_posix()}"
+            return static(relative_path.as_posix())
     return None
 
 
