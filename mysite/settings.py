@@ -17,6 +17,19 @@ from importlib.util import find_spec
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+IS_RENDER = bool(os.getenv("RENDER"))
+
+
+def resolve_render_path(preferred, fallback):
+    candidate = Path(preferred)
+    try:
+        candidate.mkdir(parents=True, exist_ok=True)
+        return candidate
+    except OSError:
+        fallback_path = Path(fallback)
+        fallback_path.mkdir(parents=True, exist_ok=True)
+        return fallback_path
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -25,7 +38,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-74l6p76kg0gah6w=5^toc(0r#lrs+817d_ip4d9vi+2(w+ho%r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-default_debug = "False" if os.getenv("RENDER") else "True"
+default_debug = "False" if IS_RENDER else "True"
 DEBUG = os.getenv("DEBUG", default_debug).lower() == "true"
 
 default_hosts = [".onrender.com", "localhost", "127.0.0.1"]
@@ -85,10 +98,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+if IS_RENDER:
+    render_db_path = resolve_render_path("/var/data", "/tmp") / "db.sqlite3"
+else:
+    render_db_path = BASE_DIR / "db.sqlite3"
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": render_db_path,
     }
 }
 
@@ -130,7 +148,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
-MEDIA_ROOT = Path("/tmp/media") if os.getenv("RENDER") else BASE_DIR / "media"
+MEDIA_ROOT = (
+    resolve_render_path("/var/data/media", "/tmp/media")
+    if IS_RENDER
+    else BASE_DIR / "media"
+)
 if find_spec("whitenoise") is not None:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
